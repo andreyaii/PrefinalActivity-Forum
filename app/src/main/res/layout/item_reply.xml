@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="#F8F9FF"
+    android:paddingStart="10dp"
+    android:paddingEnd="4dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:layout_marginBottom="4dp">
+
+    <!-- Left accent bar (visual indicator it's a reply) -->
+    <View
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:background="#4361EE"
+        android:layout_marginEnd="10dp"/>
+
+    <!-- Reply content: username + text -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvReplyUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#4361EE"/>
+
+        <TextView
+            android:id="@+id/tvReplyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            android:lineSpacingMultiplier="1.3"/>
+
+    </LinearLayout>
+
+    <!--
+        Delete reply button — shown only if the reply belongs to the current user.
+        Controlled in PostAdapter.renderReplies()
+    -->
+    <Button
+        android:id="@+id/btnDeleteReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="✕"
+        android:textSize="11sp"
+        android:textColor="#FF4444"
+        android:visibility="gone"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:minWidth="0dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"/>
+
+</LinearLayout>
