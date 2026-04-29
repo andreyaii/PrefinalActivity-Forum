@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.prefinalproj.R
 import com.example.prefinalproj.databinding.ActivityNewPostBinding
 import com.example.prefinalproj.network.RetrofitClient
 import kotlinx.coroutines.launch
@@ -33,11 +34,11 @@ class NewPostActivity : AppCompatActivity() {
         supportActionBar?.title = "New Post"
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // Show back arrow
 
-        // Read the saved user ID
+
         val prefs = getSharedPreferences("forum_prefs", Context.MODE_PRIVATE)
         currentUserId = prefs.getInt("user_id", -1)
 
-        // --- Submit Post Button ---
+
         binding.btnSubmitPost.setOnClickListener {
             val postText = binding.etPostContent.text.toString().trim()
 
@@ -52,6 +53,13 @@ class NewPostActivity : AppCompatActivity() {
             }
 
             submitPost(postText)
+        }
+
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+
+
+        toolbar.setNavigationOnClickListener {
+            finish()
         }
     }
 

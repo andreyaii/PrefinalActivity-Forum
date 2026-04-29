@@ -56,7 +56,7 @@ interface ForumApiService {
     suspend fun loginUser(
         @Field("username") username: String,
         @Field("password") password: String
-    ): Response<User>
+    ): Response<LoginResponse>
 
     /**
      * 4. CREATE POST

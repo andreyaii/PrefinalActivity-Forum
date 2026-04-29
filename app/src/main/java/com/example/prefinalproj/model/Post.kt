@@ -20,10 +20,10 @@ data class Post(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("user_id")
+    @SerializedName("uid")
     val userId: Int,
 
-    @SerializedName("username")
+    @SerializedName("user")
     val username: String,
 
     @SerializedName("post")

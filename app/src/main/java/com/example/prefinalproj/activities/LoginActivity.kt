@@ -15,23 +15,6 @@ import kotlinx.coroutines.launch
  * LoginActivity.kt
  * -----------------
  * The first screen the user sees. Handles login logic.
- *
- * KEY CONCEPTS USED HERE:
- *
- * 1. View Binding (ActivityLoginBinding):
- *    Instead of using findViewById() to get views, View Binding auto-generates
- *    a binding class from your XML. So `binding.etUsername` directly refers to
- *    the EditText with id "etUsername" in activity_login.xml.
- *
- * 2. SharedPreferences:
- *    A simple key-value store built into Android. We use it to save the user's
- *    ID after login, so we can retrieve it later in any Activity without
- *    passing it through every Intent manually.
- *
- * 3. Coroutines (lifecycleScope.launch):
- *    API calls MUST NOT run on the main (UI) thread — it would freeze the app.
- *    `lifecycleScope.launch` runs the code on a background thread automatically.
- *    When it's done, you're back on the main thread to update the UI.
  */
 class LoginActivity : AppCompatActivity() {
 
@@ -41,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inflate the layout using View Binding (instead of setContentView(R.layout.activity_login))
+        // Inflate the layout using View Binding
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -84,13 +67,9 @@ class LoginActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
         binding.btnLogin.isEnabled = false  // Prevent double-tapping
 
-        // lifecycleScope is tied to this Activity's lifecycle.
-        // If the Activity is destroyed (e.g., back button), the coroutine cancels automatically.
         lifecycleScope.launch {
             try {
                 // --- MAKE THE API CALL ---
-                // `RetrofitClient.apiService` is our shared Retrofit instance
-                // `loginUser` is a suspend function that runs on a background thread
                 val response = RetrofitClient.apiService.loginUser(username, password)
 
                 // Hide loading indicator
@@ -99,16 +78,28 @@ class LoginActivity : AppCompatActivity() {
 
                 // --- CHECK THE RESPONSE ---
                 if (response.isSuccessful && response.body() != null) {
-                    val user = response.body()!!
+                    // 1. Grab the wrapper object (LoginResponse)
+                    val loginData = response.body()!!
 
-                    // Save user ID and username in SharedPreferences for later use
-                    saveUserToPrefs(user.id, user.username)
+                    // 2. Check if success is true AND the user object exists
+                    if (loginData.success && loginData.user != null) {
 
-                    Toast.makeText(this@LoginActivity, "Welcome, ${user.username}!", Toast.LENGTH_SHORT).show()
-                    goToMain()
+                        // 3. Extract the actual user data
+                        val user = loginData.user
+
+                        // Save user ID and username in SharedPreferences for later use
+                        saveUserToPrefs(user.id, user.username)
+
+                        Toast.makeText(this@LoginActivity, "Welcome, ${user.username}!", Toast.LENGTH_SHORT).show()
+                        goToMain()
+
+                    } else {
+                        // The server returned a 200 OK, but success was false (wrong password)
+                        Toast.makeText(this@LoginActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    // API returned an error or "false"
-                    Toast.makeText(this@LoginActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                    // The server returned an error code (like 404 or 500)
+                    Toast.makeText(this@LoginActivity, "Server error. Try again.", Toast.LENGTH_SHORT).show()
                 }
 
             } catch (e: Exception) {
@@ -122,13 +113,6 @@ class LoginActivity : AppCompatActivity() {
 
     /**
      * Saves the logged-in user's data to SharedPreferences.
-     *
-     * SharedPreferences works like a persistent dictionary:
-     *   - `edit()` opens a write transaction
-     *   - `putInt / putString` sets values
-     *   - `apply()` saves asynchronously (use `commit()` if you need it to be synchronous)
-     *
-     * Retrieve later with: prefs.getInt("user_id", -1)
      */
     private fun saveUserToPrefs(userId: Int, username: String) {
         val prefs = getSharedPreferences("forum_prefs", Context.MODE_PRIVATE)
@@ -141,7 +125,6 @@ class LoginActivity : AppCompatActivity() {
     /** Navigates to MainActivity and clears the back stack so user can't go back to Login */
     private fun goToMain() {
         val intent = Intent(this, MainActivity::class.java)
-        // These flags clear the Activity back stack — pressing Back won't return to Login
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()

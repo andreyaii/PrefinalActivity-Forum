@@ -1,56 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F5F5"
-    android:padding="16dp">
+    android:background="#F8F9FA"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="What's on your mind?"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#1A1A2E"
-        android:layout_marginBottom="12dp"/>
-
-    <!--
-        Multi-line EditText for the post content.
-        minLines=5 ensures it's tall enough to start,
-        maxLines=15 prevents it growing infinitely.
-        gravity=top|start puts the cursor at the top-left (not center).
-    -->
-    <EditText
-        android:id="@+id/etPostContent"
+    <!-- Top Bar with Back Button -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:hint="Write your post here..."
-        android:inputType="textMultiLine|textCapSentences"
-        android:gravity="top|start"
-        android:padding="16dp"
-        android:textSize="16sp"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:minLines="5"
-        android:layout_marginBottom="16dp"/>
+        app:elevation="0dp">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:layout_marginBottom="8dp"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="#1A1A2E">
 
-    <Button
-        android:id="@+id/btnSubmitPost"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="New Post"
+                android:textColor="#1A1A2E"
+                android:textSize="20sp" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="Post"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#4361EE"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="What's on your mind?"
+            android:textColor="#1A1A2E"
+            android:textSize="18sp" />
+
+        <!-- Post Input Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPostContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="top|start"
+                    android:hint="Start typing your story..."
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:padding="16dp"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <!-- Submit Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmitPost"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Post Conversation"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:icon="@android:drawable/ic_menu_send"
+            app:iconGravity="textEnd" />
+
+    </LinearLayout>
 </LinearLayout>

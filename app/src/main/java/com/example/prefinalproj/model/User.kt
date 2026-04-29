@@ -12,10 +12,13 @@ import com.google.gson.annotations.SerializedName
  *
  * Example JSON: { "id": 5, "username": "alice" }
  */
-data class User(
-    @SerializedName("id")
-    val id: Int,
+data class LoginResponse(
+    @SerializedName("success") val success: Boolean,
+    @SerializedName("user") val user: User?
+)
 
-    @SerializedName("username")
-    val username: String
+// This catches the inner user data
+data class User(
+    @SerializedName("id") val id: Int,
+    @SerializedName("username") val username: String
 )

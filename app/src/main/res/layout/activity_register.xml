@@ -1,151 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="#F8F9FA"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="32dp">
+        android:padding="24dp">
+
+        <!-- Header Section -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="40dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:text="Create Account"
-            android:textSize="32sp"
-            android:textStyle="bold"
             android:textColor="#1A1A2E"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="36sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Join the conversation"
-            android:textSize="15sp"
-            android:textColor="#666666"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginTop="8dp"
+            android:alpha="0.7"
+            android:fontFamily="sans-serif-medium"
+            android:text="Join the conversation today"
+            android:textColor="#1A1A2E"
+            android:textSize="16sp" />
 
-        <androidx.cardview.widget.CardView
+        <!-- Card container -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            android:layout_marginTop="32dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="28dp">
 
-                <!-- Username -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Username"
-                    android:textSize="13sp"
-                    android:textColor="#444444"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="6dp"/>
-
-                <EditText
-                    android:id="@+id/etUsername"
+                <!-- Username Field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:hint="Choose a username"
-                    android:inputType="text"
-                    android:background="@drawable/bg_edittext"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="16dp"/>
-
-                <!-- Password -->
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Password"
-                    android:textSize="13sp"
-                    android:textColor="#444444"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="6dp"/>
+                    android:hint="Username"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:startIconDrawable="@android:drawable/ic_menu_myplaces">
 
-                <EditText
-                    android:id="@+id/etPassword"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password Field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:hint="Create a password"
-                    android:inputType="textPassword"
-                    android:background="@drawable/bg_edittext"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="16dp"/>
-
-                <!-- Confirm Password -->
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Confirm Password"
-                    android:textSize="13sp"
-                    android:textColor="#444444"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="6dp"/>
+                    android:layout_marginTop="16dp"
+                    android:hint="Password"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
 
-                <EditText
-                    android:id="@+id/etConfirmPassword"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Confirm Password Field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:hint="Repeat your password"
-                    android:inputType="textPassword"
-                    android:background="@drawable/bg_edittext"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="24dp"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Confirm Password"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone" />
 
                 <!-- Register Button -->
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRegister"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="24dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="Create Account"
+                    android:textAllCaps="false"
                     android:textSize="16sp"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#4361EE"
-                    android:layout_marginBottom="12dp"/>
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"
-                    android:layout_marginBottom="12dp"/>
-
-                <!-- Back to Login -->
-                <Button
-                    android:id="@+id/btnGoToLogin"
+                <!-- Divider -->
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_centerInParent="true"
+                        android:background="#EEEEEE" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="#FFFFFF"
+                        android:paddingHorizontal="12dp"
+                        android:text="OR"
+                        android:textColor="#999999"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <!-- Back to Login Link -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoToLogin"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="Already have an account? Login"
-                    android:textSize="14sp"
-                    android:textColor="#4361EE"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    android:textAllCaps="false"
+                    android:textColor="#4361EE" />
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </ScrollView>

@@ -20,13 +20,13 @@ data class Reply(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("user_id")
+    @SerializedName("uid")
     val userId: Int,
 
     @SerializedName("post_id")
     val postId: Int,
 
-    @SerializedName("username")
+    @SerializedName("user")
     val username: String,
 
     @SerializedName("reply")
